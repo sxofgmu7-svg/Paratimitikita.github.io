@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Scarlet ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #0b0033, #000);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5em;
+    }
+    .mensaje {
+      font-size: 1.3em;
+      opacity: 0.9;
+    }
+    .heart {
+      position: absolute;
+      color: pink;
+      font-size: 20px;
+      animation: float 6s infinite ease-in;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Te Amo Muchote Scarlet 💖</h1>
+<p class="mensaje">Mi niña hermosa, eres lo más lindo que me pasó</p>
+
+<script>
+  function crearCorazon() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+  setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html>
