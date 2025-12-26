@@ -1,53 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Para Scarlet ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      background: radial-gradient(circle, #0b0033, #000);
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      overflow: hidden;
-    }
-    h1 {
-      margin-top: 40px;
-      font-size: 2.5em;
-    }
-    .mensaje {
-      font-size: 1.3em;
-      opacity: 0.9;
-    }
-    .heart {
-      position: absolute;
-      color: pink;
-      font-size: 20px;
-      animation: float 6s infinite ease-in;
-    }
-    @keyframes float {
-      0% { transform: translateY(100vh); opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Para Scarlet 💫</title>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at bottom, #0b1d3a, #020111);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px pink;
+}
+
+p {
+  font-size: 1.4em;
+  opacity: 0.9;
+  text-shadow: 0 0 10px white;
+}
+
+.orbita {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: girar 20s linear infinite;
+}
+
+.corazon {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+
+@keyframes girar {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+</style>
 </head>
+
 <body>
 
-<h1>Te Amo Muchote Scarlet 💖</h1>
-<p class="mensaje">Mi niña hermosa, eres lo más lindo que me pasó</p>
+<canvas id="estrellas"></canvas>
+
+<div class="contenido">
+  <h1>Te Amo Muchote Scarlet 💖</h1>
+  <p>Mi niña hermosa, eres mi universo entero</p>
+</div>
+
+<div class="orbita">
+  <div class="corazon">❤️</div>
+</div>
 
 <script>
-  function crearCorazon() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
+const canvas = document.getElementById("estrellas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+for (let i = 0; i < 300; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5,
+    o: Math.random()
+  });
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let s of stars) {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${s.o})`;
+    ctx.fill();
   }
-  setInterval(crearCorazon, 300);
+}
+
+function animate() {
+  drawStars();
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.onresize = () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+};
 </script>
 
 </body>
